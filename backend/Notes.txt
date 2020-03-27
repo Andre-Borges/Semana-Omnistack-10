@@ -1,0 +1,4 @@
+USER - omnistack
+PASS - omnistack
+
+http://portquiz.net:27017/ - PORTA PADRÃO MONGODB
