@@ -9,6 +9,12 @@ main ul {
   list-style: none;
 }
 
+@media only screen and (max-width: 650px) {
+  main ul {
+    grid-template-columns: 1fr;
+  }
+}
+
 li.dev-item {
   background: #fff;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
@@ -16,7 +22,7 @@ li.dev-item {
   padding: 20px;
 }
 
-li.dev-item {
+li.dev-item header {
   display: flex;
   flex-direction: row;
   align-items: center;
