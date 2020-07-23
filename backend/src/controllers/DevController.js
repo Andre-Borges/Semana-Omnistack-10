@@ -17,9 +17,7 @@ module.exports = {
     let dev = await Dev.findOne({ github_username });
 
     if (!dev) {
-      const apiResponse = await axios.get(
-        `https://api.github.com/users/${github_username}`,
-      );
+      const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
 
       // Se o name não existir pega o login
       const { name = login, avatar_url, bio } = apiResponse.data;
@@ -40,7 +38,45 @@ module.exports = {
         location,
       });
     }
-
     return response.json(dev);
+  },
+
+  async read(req, res) {
+    const { github_username } = req.params;
+    const dev = await Dev.findOne({ github_username });
+
+    return res.json(dev === null ? {} : dev);
+  },
+
+  async update(req, res) {
+    const { github_username } = req.params;
+    const dev = await Dev.findOne({ github_username });
+    const { latitude, longitude, techs, ...rest } = req.body;
+    rest.github_username = github_username;
+    if (latitude && longitude)
+      var newLocation = {
+        type: 'Point',
+        coordinates: [longitude, latitude],
+      };
+    if (techs) var techsArray = parseStringAsArray(techs);
+    const newDev = await Dev.updateOne(
+      { github_username },
+      {
+        location: latitude && longitude ? newLocation : dev.location,
+        techs: techs ? techsArray : dev.techs,
+        ...rest,
+      }
+    );
+
+    return res.json({
+      modifiedCount: newDev.nModified,
+      ok: newDev.ok,
+    });
+  },
+
+  async delete(req, res) {
+    const { github_username } = req.params;
+    await Dev.deleteOne({ github_username });
+    return res.json();
   },
 };

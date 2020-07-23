@@ -6,10 +6,7 @@ const routes = require('./routes.js');
 const app = express();
 
 // Clusters Atlas Mongodb -> https://www.mongodb.com/cloud/atlas
-mongoose.connect(
-  'mongodb+srv://omnistack:omnistack@cluster0-7bqmv.mongodb.net/week10?retryWrites=true&w=majority',
-  { useNewUrlParser: true, useUnifiedTopology: true },
-);
+mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-7bqmv.mongodb.net/week10?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(cors()); // Libera acesso externo pra todo tipo de aplicação
