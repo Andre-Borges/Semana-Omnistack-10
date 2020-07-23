@@ -35,11 +35,7 @@ function Main({ navigation }) {
   }, []);
 
   async function loadDevs() {
-    console.log('teste');
-
     const { latitude, longitude } = currentRegion;
-
-    console.log(latitude, longitude, techs);
 
     const response = await api.get('/search', {
       params: {
@@ -67,15 +63,15 @@ function Main({ navigation }) {
           <Marker
             key={dev._id}
             coordinate={{
-              latitude: dev.location.coordinates[0],
-              longitude: dev.location.coordinates[1],
+              longitude: dev.location.coordinates[0],
+              latitude: dev.location.coordinates[1],
             }}
           >
-            <Image style={styles.avatar} source={{ uri: 'https://avatars1.githubusercontent.com/u/30246642?s=460&u=24105a32bde1c0c2bc975b2d998bceb92df6bf5e&v=4' }} />
+            <Image style={styles.avatar} source={{ uri: dev.avatar_url }} />
 
             <Callout
               onPress={() => {
-                navigation.navigate('Profile', { github: dev.github });
+                navigation.navigate('Profile', { github_username: dev.github_username });
               }}
             >
               <View style={styles.callout}>
@@ -89,8 +85,9 @@ function Main({ navigation }) {
       </MapView>
       <View style={styles.searchForm}>
         <TextInput style={styles.searchInput} placeholder="Buscar devs por techs..." placeholderTextColor="#999" autoCapitalize="words" autoCorrect={false} value={techs} onChangeText={setTechs} />
-        <TouchableOpacity onpress={loadDevs} style={styles.loadButton}>
-          <MaterialIcons name="my-location" size={20} color="#fff" />
+
+        <TouchableOpacity onPress={loadDevs} style={styles.loadButton}>
+          <MaterialIcons name="my-location" size={20} color="#FFF" />
         </TouchableOpacity>
       </View>
     </>
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
     height: 54,
     borderRadius: 4,
     borderWidth: 4,
-    borderColor: '#fff',
+    borderColor: '#FFF',
   },
 
   callout: {
@@ -124,7 +121,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 
-  devBio: {
+  devTechs: {
     marginTop: 5,
   },
 
@@ -140,7 +137,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     height: 50,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     color: '#333',
     borderRadius: 25,
     paddingHorizontal: 20,
@@ -157,7 +154,7 @@ const styles = StyleSheet.create({
   loadButton: {
     width: 50,
     height: 50,
-    backgroundColor: '#8e4dff',
+    backgroundColor: '#8E4Dff',
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
