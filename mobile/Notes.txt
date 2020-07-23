@@ -1,0 +1,5 @@
+Ctrl + M no Android Device para reload. Ou R+R.
+
+React Native version mismatch -> watchman watch-del-all && react-native start --reset-cache
+
+https://stackoverflow.com/questions/51726261/react-native-console-error-react-native-version-mismatch
