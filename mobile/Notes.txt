@@ -5,3 +5,5 @@ React Native version mismatch -> watchman watch-del-all && react-native start --
 https://stackoverflow.com/questions/51726261/react-native-console-error-react-native-version-mismatch
 
 Atualizar expo cli -> npm install -g expo-cli
+
+services -> api / socket -> colocar a URL do expo
